@@ -1,11 +1,34 @@
 'use strict'
 
-const actions = {}
-const filters = {}
+class Hackable {
+
+  actions: []
+
+  filters: []
+
+  addActions(name, handler) {
+    let action = new Action(name)
+    action.addHandler(handler)
+    this.actions[action.name] = action
+  }
+
+  doAction(name, data) {
+    this.actions[name](data)
+  }
+
+  addFilter(name, handler) {
+    let filter = new Filter(name)
+    filter.addHandler(handler)
+    this.filters[name] = filter
+  }
+
+  async doFilter(name, data) {
+    return await this.filters[name](data)
+  }
+
+}
 
 class Hook {
-
-  cursorIndex = 0;
 
   name: ''
 
@@ -19,13 +42,8 @@ class Hook {
     this.handlers.push(handler)
   }
 
-  next(data) {
-    if (typeof this.handlers[this.cursorIndex] === 'undefined') return
-    throw new Error('Unsupported operation.')
-  }
-
   invoke(data) {
-
+    throw new Error('No default implementation found.')
   }
 
 }
@@ -36,29 +54,36 @@ class Action extends Hook {
     super(name)
   }
 
-  next(data) {
-    super.next(data)
-    this.handlers[this.cursorIndex++].call(data, next)
+  invoke(data) {
+    this.handlers.forEach((handler) => {
+      handler(data)
+    })
   }
 
 }
 
-function addAction(name, handler) {
-  let action = new Action(name)
-  action.addHandler(handler)
-  actions[action.name] = action;
+class Filter extends Hook {
+
+  cursorIdx = 0;
+
+  constructor(name) {
+    super(name);
+  }
+
+  async invoke(data) {
+    let ndata = data;
+    for (;;) {
+      if (this.cursorIdx === this.handlers.length) return ndata;
+      ndata = this.next(ndata)
+    }
+  }
+
+  async next(data) {
+    let ndata = Object.assign({}, data)
+    ndata = await this.handlers[this.cursorIdx++](ndata, this.next)
+    return ndata;
+  }
+
 }
 
-function doAction(name, data) {
-
-}
-
-function addFilter(name, handler) {
-
-}
-
-function doFilter(name, data) {
-
-}
-
-export {addAction, doAction, addFilter, doFilter}
+export {Hackable};
