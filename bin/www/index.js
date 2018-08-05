@@ -1,10 +1,6 @@
-const {ApolloServer, gql} = require('apollo-server');
+import {ApolloServer} from 'apollo-server';
 
-const typeDefs =  gql`
-  type Query {
-    hello: String
-  }
-`;
+const typeDefs =  ''
 
 const resolvers = {}
 
