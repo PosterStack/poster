@@ -2,9 +2,9 @@
 
 class Hackable {
 
-  actions: []
+  actions = []
 
-  filters: []
+  filters = []
 
   addActions(name, handler) {
     let action = new Action(name)
@@ -30,12 +30,9 @@ class Hackable {
 
 class Hook {
 
-  name: ''
-
-  handlers = []
-
   constructor(name) {
     this.name = name;
+    this.handlers = []
   }
 
   addHandler(handler) {
@@ -86,4 +83,4 @@ class Filter extends Hook {
 
 }
 
-export {Hackable};
+exports = Hackable
