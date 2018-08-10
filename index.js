@@ -1,16 +1,14 @@
-const Poster = require('poster')
-const Hackable = require('hackable')
+const Poster = require('pstack/models')
 
 const context = {
-  hooks: new Hackable()
+
 }
 
 const typeDefs =  {}
 
 const resolvers = {}
 
-const app = new Poster({
-  typeDefs, resolvers, context
-})
+const app = new Poster({typeDefs, resolvers, context})
 
 app.start()
+

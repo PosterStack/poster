@@ -1,9 +1,0 @@
-{
-  "main": "index.js",
-  "dependencies": {
-    "apollo-server": "^2.0.0",
-    "graphql": "^0.13.2",
-    "hackable": "file:./core/libs/hackable",
-    "poster": "file:./core"
-  }
-}

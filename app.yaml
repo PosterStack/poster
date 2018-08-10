@@ -1,0 +1,9 @@
+name: poster
+version: 1.0.1
+
+client
+  basePath: /poster
+
+server
+  baseUrl: /poster
+
