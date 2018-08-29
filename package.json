@@ -1,0 +1,14 @@
+{
+  "name": "poster",
+  "version": "0.0.1",
+  "description": "Hackable CMS",
+  "main": "index.js",
+  "repository": "git@github.com:posterstack/poster.git",
+  "author": "akterstack",
+  "license": "MIT",
+  "private": false,
+  "upstack": {},
+  "dependencies": {
+    "hackablejs": "1.0.3"
+  }
+}

@@ -1,7 +1,9 @@
 .idea
 build
 target
+linked_modules
 node_modules
+
 *.iml
 *.ipr
 *.log
